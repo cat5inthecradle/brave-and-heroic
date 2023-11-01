@@ -1,12 +1,27 @@
+<script setup>
+import { ref } from 'vue'
+import rooms from '../map/TheMynock.yml'
+
+console.log("GameView.vue Script Setup");
+
+const room = ref(rooms.cockpit);
+
+function goTo(roomName) {
+  console.log("going to room:", roomName);
+  if (rooms[roomName]) {
+    room.value = rooms[roomName];
+  } else {
+    console.error("Room not found:", roomName);
+  }
+}
+</script>
+
 <template>
   <div class="datapad-wrapper">
     <div class="datapad">
       <div class="display panel">
-        <section class="room-description">You are in the cockpit.</section>
-        <section class="room-detail">
-          The cockpit is a small room with two seats and a control panel. There are exits to the
-          Crew Quarters and to the Gunnery Bay. A small Ceramic Rooster sits on the control panel.
-        </section>
+        <section class="room-description">{{ room.description }}</section>
+        <section class="room-detail">{{ room.detail }}</section>
       </div>
       <div class="button-row">
         <button>&lt;&gt;</button>
@@ -15,9 +30,13 @@
       </div>
       <div class="commands panel">
         <ul>
-          <li>Climb up to the Gunnery Bay</li>
-          <li>Go to the Crew Quarters</li>
-          <li>Take the Ceramic Rooster</li>
+          <li
+            v-for="exit in room.exits"
+            :key="exit.room"
+            @click="goTo(exit.room)"
+          >
+            {{ exit.text }}
+          </li>
         </ul>
       </div>
     </div>
