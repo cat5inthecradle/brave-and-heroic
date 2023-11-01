@@ -1,0 +1,13 @@
+:root {
+  /* Sizing */
+  --font-size: 18px;
+
+  --color-primary: lime;
+  --color-emphasis: white;
+  --color-background: black;
+
+  --color-datapad: #222;
+
+  --color-text: var(--color-primary);
+  --color-link: var(--color-emphasis);
+}
