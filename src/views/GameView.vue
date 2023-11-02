@@ -1,18 +1,58 @@
 <script setup>
 import { ref } from 'vue'
 import rooms from '../map/TheMynock.yml'
+import GameState from '../lib/GameState'
 
-console.log("GameView.vue Script Setup");
+console.log('GameView.vue Script Setup')
 
-const room = ref(rooms.cockpit);
+const room = ref(rooms.cockpit)
+const moment = ref(undefined)
+const gameState = ref(
+  new GameState({
+    Tamlin: { is: 'unsafe' },
+    Tryst: { is: 'lost' },
+    Leenik: { is: 'frantic' },
+    Bacta: { has: [] },
+  })
+)
+
+const showGameState = ref(false)
+function toggleGameState() {
+  showGameState.value = !showGameState.value
+}
 
 function goTo(roomName) {
-  console.log("going to room:", roomName);
+  console.log('going to room:', roomName)
   if (rooms[roomName]) {
-    room.value = rooms[roomName];
+    room.value = rooms[roomName]
   } else {
-    console.error("Room not found:", roomName);
+    console.error('Room not found:', roomName)
   }
+}
+
+function startMoment(momentName) {
+  console.log('triggering moment:', momentName)
+  moment.value = room.value.moments[momentName]
+}
+
+function resolveEffect(effect) {
+  console.log('resolving effect:', effect)
+  gameState.value.set(...effect)
+  moment.value = undefined
+}
+
+/**
+ * Filter an array of objects that have a `condition` property. Checking the
+ * conditions in the game state.
+ * @param {} items
+ */
+function conditional(items) {
+  return items?.filter((item) => {
+    console.log('checking condition:', item.condition)
+    if (!item.condition) return true
+    console.log('got value', gameState.value.check(...item.condition))
+    return gameState.value.check(...item.condition)
+  })
 }
 </script>
 
@@ -20,21 +60,59 @@ function goTo(roomName) {
   <div class="datapad-wrapper">
     <div class="datapad">
       <div class="display panel">
-        <section class="room-description">{{ room.description }}</section>
-        <section class="room-detail">{{ room.detail }}</section>
+        <template v-if="showGameState">
+          <section class="display-description">Game State</section>
+          <section class="display-detail">
+            <pre>{{ gameState }}</pre>
+          </section>
+        </template>
+
+        <template v-else-if="moment">
+          <section class="display-description">{{ moment.description }}</section>
+          <section class="display-detail" v-html="moment.detail"></section>
+        </template>
+
+        <template v-else>
+          <section class="display-description">
+            {{ moment?.description ?? room.description }}
+          </section>
+          <section class="display-detail">{{ moment?.detail ?? room.detail }}</section>
+        </template>
       </div>
       <div class="button-row">
         <button>&lt;&gt;</button>
-        <button>{&nbsp;}</button>
+        <button
+          :class="{ active: showGameState }"
+          @click="toggleGameState"
+        >
+          {&nbsp;}
+        </button>
         <button>inv</button>
       </div>
       <div class="commands panel">
-        <ul>
+        <ul v-if="showGameState">
+          <li @click="toggleGameState">Back</li>
+        </ul>
+
+        <ul v-else-if="moment">
           <li
-            v-for="exit in room.exits"
-            :key="exit.room"
-            @click="goTo(exit.room)"
+            v-for="command in conditional(moment.commands)"
+            :key="command.text"
+            @click="resolveEffect(command.effect)"
           >
+            {{ command.text }}
+          </li>
+        </ul>
+
+        <ul v-else>
+          <li
+            v-for="command in conditional(room.commands)"
+            :key="command.text"
+            @click="startMoment(command.moment)"
+          >
+            {{ command.text }}
+          </li>
+          <li v-for="exit in room.exits" :key="exit.room" @click="goTo(exit.room)">
             {{ exit.text }}
           </li>
         </ul>
@@ -83,7 +161,7 @@ function goTo(roomName) {
   height: 50%;
 }
 
-.room-description {
+.display-description {
   padding-bottom: 0.5em;
 }
 
@@ -91,7 +169,7 @@ function goTo(roomName) {
 
 .commands {
   height: 25%;
-  padding: .5em;
+  padding: 0.5em;
   flex: 1;
 }
 .commands ul {
@@ -125,8 +203,8 @@ button:hover {
   border-color: var(--color-emphasis);
   color: var(--color-emphasis);
 }
-button:active {
-  background: var(--color-primary);
+button:active, button.active {
+  background: #222;
   color: var(--color-primary);
   border-color: var(--color-primary);
 }

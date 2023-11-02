@@ -1,6 +1,4 @@
 # This is an object with a series of named 'rooms'.
-
-# The first room is the starting room.
 cockpit:
   description: You are in the cockpit.
   detail: |
@@ -9,10 +7,10 @@ cockpit:
     to the Crew Quarters, and up to the Gunnery Bay. A small ceramic rooster
     sits on the control panel.
   exits:
-    - room: crewQuarters
-      text: Go to the Crew Quarters
     - room: gunneryBay
       text: Climb up into the Gunnery Bay
+    - room: crewQuarters
+      text: Go to the Crew Quarters
 
 gunneryBay:
   description: You are in the gunnery bay.
@@ -24,3 +22,83 @@ gunneryBay:
   exits:
     - room: cockpit
       text: Climb down into the Cockpit
+
+crewQuarters:
+  description: You are in the crew quarters.
+  detail: |
+    The crew quarters sit between the cockpit and the kitchen. Bunks are in an
+    alcove portside and there is a row of lockers starboard. Tamlin sleeps
+    quietly in his bunk.
+  exits:
+    - room: cockpit
+      text: Go to the Cockpit
+    - room: kitchen
+      text: Go to the Kitchen
+  commands:
+    - condition: [Tamlin.is, unsafe]
+      text: Check on Tamlin
+      moment: checkTamlin
+  moments:
+    checkTamlin:
+      description: You check on Tamlin.
+      detail: |
+        The 5-year-old Zabrak child is sleeping quietly in his bunk. The way his
+        head is turned, you can't see the fresh tattoos on half of his face - a
+        Dathomiran ritual that was interrupted when you rescued him. He looks
+        peaceful, but exhausted and sore from your escape from the Emperor's
+        Murder Ball. You should let him rest.
+      commands:
+        - text: Let him rest
+          effect: [Tamlin.is, asleep]
+
+kitchen:
+  description: You are in the kitchen.
+  detail: |
+    The kitchen is a small room with a counter and a few cabinets. A small
+    booth sits along the starboard wall. The decor is... kitchy, to say the
+    least. A hatch under the counter leads back to the engine room, the
+    forward end of the room opens to the crew quarters. Leenik is frantically
+    trying to open the door to one of the escape pods.
+  exits:
+    - room: crewQuarters
+      text: Go to the Crew Quarters
+    - room: engineRoom
+      text: Crawl into the Engine Room
+  commands:
+    - condition: [Leenik.is, frantic]
+      text: !Say "Leenik, please, do NOT take the escape pod..."
+      moment: persuadeLeenikToStay
+  moments:
+    persuadeLeenikToStay:
+      description: 
+      detail: |
+        Leenik Geelo, a tall, slender, atractive Rodian, with an eye patch,
+        takes a deep breath. One hand on the escape pod, he turns to you to say,
+        <br><br>
+        "Alright... You've convinced me."
+      commands:
+        - text: !Say "I'm glad that it was that easy"
+          effect: [Leenik.is, calm]
+
+engineRoom:
+  description: You are in the engine room.
+  detail: |
+    The engine room is a cramped space with access to the internals of the
+    ship's main engine and hyperdrive. A small ceramic rooster sits on top of
+    the hyperdrive. The kitchen is behind you.
+  exits:
+    - room: kitchen
+      text: Crawl into the Kitchen
+  commands:
+    - condition: [Bacta.has.not, leenik-rooster]
+      text: Take the rooster
+      moment: takeRooster
+  moments:
+    takeRooster:
+      description: You take the rooster.
+      detail: |
+        It's a small ceramic rooster, about the size of your fist. It's coloring
+        is extravagant and someone has given it an eye patch.
+      commands:
+        - text: !Say "That's weird..."
+          effect: [Bacta.has, leenik-rooster]
