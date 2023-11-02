@@ -74,9 +74,9 @@ function conditional(items) {
 
         <template v-else>
           <section class="display-description">
-            {{ moment?.description ?? room.description }}
+            {{ room.description }}
           </section>
-          <section class="display-detail">{{ moment?.detail ?? room.detail }}</section>
+          <section class="display-detail">{{ room.detail }}</section>
         </template>
       </div>
       <div class="button-row">
