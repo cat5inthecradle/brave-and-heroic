@@ -17,7 +17,7 @@ gunneryBay:
   detail: |
     The gunnery bay is a cramped single seat turret on the top of the ship. A
     domed window looks out into space. As this is the closest thing to a private
-    space you have on the ship, a few of your personal effect decorate the room.
+    space you have on the ship, a few of your personal effects decorate the room.
     You can see the cockpit below.
   exits:
     - room: cockpit
