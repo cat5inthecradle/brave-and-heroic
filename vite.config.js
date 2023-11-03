@@ -15,6 +15,7 @@ const yamlSchema = yaml.DEFAULT_SCHEMA.extend([SayYamlType]);
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/brave-and-heroic/',
   plugins: [
     vue(),
     ViteYaml({schema: yamlSchema})
