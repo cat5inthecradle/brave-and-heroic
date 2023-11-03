@@ -161,6 +161,10 @@ function conditional(items) {
   height: 50%;
 }
 
+.display-panel {
+  overflow: scroll;
+}
+
 .display-description {
   padding-bottom: 0.5em;
 }
