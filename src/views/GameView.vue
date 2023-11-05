@@ -186,6 +186,7 @@ function conditional(items) {
   display: block;
   border: 1px solid var(--color-primary);
   padding: 0.5em;
+  cursor: pointer;
 }
 
 .button-row {
