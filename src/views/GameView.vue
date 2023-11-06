@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import rooms from '../map/TheMynock.yml'
+import rooms from '../map/1-TheMynock.yml'
 import GameState from '../lib/GameState'
 
 console.log('GameView.vue Script Setup')

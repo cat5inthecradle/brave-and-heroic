@@ -1,0 +1,70 @@
+# it's springtime
+# Tryst is wearing a floral kimono
+# you have plenty of boring rations
+# spot movement in the lake
+#   don't get eaten by a lake monster
+# We have scout probes (flip lightside)
+#   "i have found a planet"
+#   "i am scanning the planet now"
+# in the escape pod
+#   lawn chair, blender
+# in kitchen
+#   limes, space-tequila
+# laundry
+#   bacta tells us to change clothes so he can do laundry
+#   this is when you get to wear your iconic outfit.
+#   leenik boxers with hearts
+# Tamlin comes down the ramp, "where are we? why are we camping? aren't we hiding?"
+#   Bacta explains history of Mykyr, Tamlin sits by Tamlin and teaches him how to wash clothes (at lake?)
+# Tryst and Leenik paint the ship
+#   light up a deathstick, paint ignites, have to run to the lake to douse yourself
+#   don't get eaten by lake monster
+# 8pm, sunset
+# tamlin medidates
+# tryst says we shouldn't lie to Tamlin, tell him what's up
+#   watched him almost kill you, bacta
+#   remember that bacta is 17
+#   Scary wolf howl
+#   leenik: we can leave him somewhere safe
+#   bacta: we should let him choose his own adventure ;)
+#   should someone keep watch? Bacta will keep watch because he doesn't sleep
+#   if he wears his helmet, he can see somewhat in the dark
+#   tamlin is meditating, fallen asleep? carry him inside
+#   something happens, you don't know what it is
+#   bring the lawn chair inside
+# in the evening
+#   some 4-legged black creature skulking around, looking at the ship
+#     can take a warning shot if you peek out hatch, if you go out, another creature should attack you
+#   warning shot makes it leave
+#   you see some movement, mountain-side, possibly multiple
+# "Good morning everyone"
+#   can make powdered eggs
+#   Tryst rises early, kimono
+#   Leenik slept in the escape pod, footie pajamas
+# "eggs, bacon, caff, gimme the special"
+# talk about fuel, just need a place to jump
+# "a cleverl intelligent species knows we're here and is stalking us"
+# "creatures on this planet that are in tune with the force"
+# try to keep Tryst covered?
+# probe droid is still functionin, no news
+# check maps to figure out a planet to go to
+#   could go to Plue (not enough fuel) or Wayland (not good planet) or talk to Kardas here
+#   can we trust Kardas
+# "we could have just one of us contact Kardas, so we don't all get captured"
+# "what if we get captured on purpose"
+#   "high risk, high reward", "what is the reward? it's all risk"
+# "kardas knows that the empire wants us, but that means we must have something the empire wants, Kardas would want to know what that is"
+# "smugglers always want the bigger score, there's gotta be something he wants"
+#   maybe he wants a clean break from the empire?
+#   a bunch of the cargo that they stole from the empire came from Kardas, you could learn something about him and his interactions with the empire
+# Quest - search the info
+# Tamlin - the force feels weird, can't feel the force in the forest
+
+# d20 is repairing himself slowly
+# 
+
+
+mynockExterior:
+  description: You are outside The Mynock
+  detail: |
+    The Mynock has landed in a small clearing in a large forest. A lake glistens to the West and North, to the East a mountain range rises
